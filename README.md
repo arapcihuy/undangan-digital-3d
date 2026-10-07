@@ -45,6 +45,11 @@ https://undangan-3d.pages.dev/demo/?to=Nama%20Tamu
 ```
 Ganti `to=` dengan nama siapa pun - cover langsung menyapa tamunya.
 
+## Gratis: template 2D open source
+
+Butuh versi ringan tanpa efek 3D? Ada template gratis di repo terpisah:
+[arapcihuy/undangan-gratis-2d](https://github.com/arapcihuy/undangan-gratis-2d)
+
 ## Struktur
 
 ```
