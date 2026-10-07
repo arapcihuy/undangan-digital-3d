@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Undangan 3D Sinematik — Rangga Studio</title>
+<meta name="description" content="Undangan pernikahan digital 3D WebGL sinematik. Cegat dengan kelas internasional, harga lokal. Mulai Rp 99rb.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Cormorant+Garamond:ital@0;1&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#07070A;--gold:#C9A75E;--gold2:#E7D2A0;--paper:#F5F1E8;--muted:#9C9686;--hair:rgba(201,167,94,.35);
+--serif:'Playfair Display',serif;--serif2:'Cormorant Garamond',serif;--sans:'Jost',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:300;line-height:1.8;overflow-x:hidden}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+h1,h2{font-family:var(--serif);line-height:1.1}
+.micro{font-size:.68rem;letter-spacing:.46em;text-transform:uppercase;color:var(--gold)}
+section{padding:clamp(64px,9vw,110px) 24px;position:relative}
+.wrap{max-width:920px;margin:0 auto}.center{text-align:center}
+.lead{color:var(--muted);font-family:var(--serif2);font-size:1.1rem}
+.btn{display:inline-block;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold2);padding:14px 30px;transition:.3s;cursor:pointer}
+.btn:hover{background:var(--gold);color:var(--ink)}
+.btn.wa{border-color:#25D366;background:#25D366;color:#04310f;font-weight:500}.btn.wa:hover{background:#1fb857;border-color:#1fb857}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* hero */
+#hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:32px 24px 60px}
+#hero h1{font-size:clamp(2.1rem,6.5vw,3.8rem);font-weight:900;margin:14px 0 0}
+#hero h1 em{font-family:var(--serif2);font-style:italic;font-weight:400;color:var(--gold)}
+#hero .sub{max-width:560px;margin:18px auto 0;color:var(--muted);font-family:var(--serif2);font-size:1.15rem}
+.hero-bg{position:absolute;inset:0;z-index:-1;background:radial-gradient(110% 80% at 50% 0%,#241d10,var(--ink) 70%)}
+.hero-bg::before{content:"";position:absolute;inset:0;
+background:url('assets/shot-cover.jpg') 50% 85%/cover no-repeat;filter:grayscale(.4) brightness(.8);opacity:.17;
+-webkit-mask-image:radial-gradient(90% 70% at 50% 20%,#000 30%,transparent 80%);mask-image:radial-gradient(90% 70% at 50% 20%,#000 30%,transparent 80%)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(1px 1px at 20% 30%,#E7D2A0 50%,transparent 51%),radial-gradient(1.5px 1.5px at 70% 20%,#E7D2A0 50%,transparent 51%),radial-gradient(1px 1px at 40% 60%,#B08A4F 50%,transparent 51%),radial-gradient(2px 2px at 85% 50%,#E7D2A0 50%,transparent 51%),radial-gradient(1px 1px at 10% 75%,#E7D2A0 50%,transparent 51%);opacity:.6}
+.badge{display:inline-block;border:1px solid var(--hair);padding:8px 20px;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2)}
+.shots{display:flex;gap:14px;justify-content:center;margin-top:38px;flex-wrap:wrap}
+.shots img{width:160px;border:1px solid var(--hair);filter:grayscale(.2);box-shadow:0 24px 50px -20px rgba(0,0,0,.9)}
+
+/* problem/solusi */
+.pgrid{display:grid;gap:16px;margin-top:40px}
+.pcard{border:1px solid var(--hair);padding:30px;background:rgba(12,12,16,.5);backdrop-filter:blur(6px)}
+.pcard .ic{font-family:var(--serif);font-size:1.05rem;letter-spacing:.3em;color:var(--gold);border-bottom:1px solid var(--hair);display:inline-block;padding-bottom:6px}
+.pcard h3{font-family:var(--serif);font-size:1.3rem;margin:8px 0 6px}
+.pcard p{color:var(--muted);font-family:var(--serif2)}
+@media(min-width:760px){.pgrid{grid-template-columns:1fr 1fr 1fr}}
+
+/* fitur */
+.feat{display:grid;gap:12px;margin-top:36px;text-align:left}
+.feat div{display:flex;gap:12px;align-items:baseline;border-bottom:1px solid rgba(201,167,94,.14);padding:10px 0}
+.feat b{color:var(--gold2);font-weight:500;white-space:nowrap}
+.feat span{color:var(--muted)}
+@media(min-width:680px){.feat{grid-template-columns:1fr 1fr}}
+
+/* harga */
+.plans{display:grid;gap:20px;margin-top:44px}
+.plan{border:1px solid var(--hair);padding:36px 28px;text-align:center;position:relative;background:rgba(12,12,16,.5)}
+.plan.hi{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,167,94,.10),rgba(12,12,16,.6));box-shadow:0 30px 70px -30px rgba(201,167,94,.35)}
+.plan .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--ink);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;padding:5px 16px;white-space:nowrap}
+.plan .nm{font-family:var(--serif);font-size:1.5rem;font-weight:700}
+.plan .pr{font-family:var(--serif);font-size:2.3rem;font-weight:900;color:var(--gold2);margin:8px 0 2px}
+.plan .pr small{font-size:.9rem;color:var(--muted);font-family:var(--serif2)}
+.plan ul{list-style:none;margin:18px 0 24px;text-align:left;font-family:var(--serif2);color:var(--muted)}
+.plan li{padding:7px 0;border-bottom:1px solid rgba(201,167,94,.12)}
+.plan li::before{content:"";display:inline-block;width:5px;height:5px;border:1px solid var(--gold);transform:rotate(45deg);margin-right:12px;vertical-align:2px}
+@media(min-width:860px){.plans{grid-template-columns:1fr 1fr 1fr}.plan.hi{transform:scale(1.04)}}
+
+/* alur / garansi / faq */
+.steps{margin-top:36px;counter-reset:s;text-align:left;max-width:640px;margin-inline:auto}
+.step{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid rgba(201,167,94,.12)}
+.step b{font-family:var(--serif);color:var(--gold);font-size:1.4rem}
+.step p b{color:var(--paper);font-weight:500;font-size:1.05rem}
+details{border:1px solid var(--hair);margin-top:12px;padding:18px 22px;text-align:left;cursor:pointer;background:rgba(12,12,16,.4)}
+details summary{font-family:var(--serif);font-size:1.05rem;font-weight:700;list-style:none}
+details summary::after{content:"+";float:right;color:var(--gold)}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);font-family:var(--serif2);margin-top:10px}
+footer{padding:60px 24px 80px;text-align:center;color:var(--muted);font-size:.8rem}
+.wafix{position:fixed;right:18px;bottom:18px;z-index:50}
+.wafix a{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#25D366;color:#04310f;font-size:1.5rem;box-shadow:0 14px 34px rgba(37,211,102,.4)}
+</style>
+</head>
+<body>
+
+<section id="hero" class="center">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <span class="badge reveal">Dikerjakan manual per pasangan · Bukan template massal · Jadi 1×24 jam</span>
+    <h1 class="reveal">Undangan Pernikahan <em>3D Sinematik</em><br>yang Bikin Tamu Bilang "Wah".</h1>
+    <p class="sub reveal">Bukan template biasa — undanganmu tampil seperti situs pemenang penghargaan internasional. Bukti utuh ada di bawah — silakan dibuka sendiri.</p>
+    <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px">
+      <a class="btn" href="http://127.0.0.1:8903/index.html?to=Calon%20Mempelai" target="_blank" rel="noopener">Lihat Demo Live →</a>
+      <a class="btn wa" href="https://wa.me/6281387906930?text=Halo%2C%20saya%20mau%20pesan%20undangan%20digital%203D" target="_blank" rel="noopener">Pesan via WhatsApp</a>
+    </div>
+    <div class="reveal" style="margin-top:16px">
+      <img src="assets/shot-cover.jpg" alt="Tampilan cover undangan 3D sinematik"
+           style="width:min(330px,80vw);margin:0 auto;border:1px solid var(--hair);box-shadow:0 40px 90px -30px rgba(0,0,0,.95),0 0 60px rgba(201,167,94,.12)">
+      <p class="micro" style="margin-top:14px">Tampilan asli produk — bukan mockup</p>
+    </div>
+    <p class="micro reveal" style="margin-top:26px">Mulai Rp 99rb · Revisi sampai puas · Jadi 1×24 jam</p>
+  </div>
+</section>
+
+<section class="center">
+  <div class="wrap">
+    <div class="micro reveal">Masalahnya</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.8rem);margin-top:8px">Kenapa Undangan Biasa <em style="font-family:var(--serif2);font-style:italic;color:var(--gold)">Kalah</em></h2>
+    <div class="pgrid reveal">
+      <div class="pcard"><div class="ic">01</div><h3>Tamu membuka, lalu lupa</h3><p>Template pasaran semua sama. Tamu scroll 5 detik, tutup, tanggalnya pun terlupakan.</p></div>
+      <div class="pcard"><div class="ic">02</div><h3>Foto kalian cuma jadi tempelan</h3><p>Desainnya menang, fotonya jadi aksesoris. Padahal foto adalah bintang utamanya.</p></div>
+      <div class="pcard"><div class="ic">03</div><h3>Tidak ada "momen"</h3><p>Tidak ada terkejut, tidak ada yang dibagikan tamu ke story. Kesempatan viral hilang begitu saja.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="center">
+  <div class="wrap">
+    <div class="micro reveal">Solusinya</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.8rem);margin-top:8px">Pengalaman, Bukan Sekadar <em style="font-family:var(--serif2);font-style:italic;color:var(--gold)">Halaman</em></h2>
+    <p class="lead reveal" style="max-width:620px;margin:14px auto 0">Teknologi WebGL 3D yang sama dipakai situs pemenang Awwwards — kini hadir di undanganmu.</p>
+    <div class="feat reveal">
+      <div><b>Pembuka sinematik</b><span>Segel lilin emas, nama muncul huruf per huruf, ledakan cahaya saat dibuka.</span></div>
+      <div><b>Partikel & glow 3D</b><span>Medan partikel emas bercahaya yang bergerak mengikuti sentuhan tamu.</span></div>
+      <div><b>Foto kalian jadi bintang</b><span>Cover foto asli digabung dengan efek sinematik — bukan tempelan.</span></div>
+      <div><b>13 seksi lengkap</b><span>Cerita cinta, galeri geser, dress code, rundown, live stream, amplop digital + QRIS.</span></div>
+      <div><b>RSVP + buku tamu</b><span>Tamu kirim doa & konfirmasi hadir — tercatat rapi, tidak ada yang terlewat.</span></div>
+      <div><b>Nama tamu otomatis</b><span>Setiap tamu merasa undangan dibuat khusus: ?to=Nama muncul di cover.</span></div>
+      <div><b>Cepat di HP</b><span>Versi ringan otomatis di ponsel. Buka kilat, hemat kuota, tetap mewah.</span></div>
+      <div><b>Musik & countdown</b><span>Latar musik lembut + hitung mundur menuju hari bahagia.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="center" id="harga">
+  <div class="wrap">
+    <div class="micro reveal">Investasi</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.8rem);margin-top:8px">Pilih <em style="font-family:var(--serif2);font-style:italic;color:var(--gold)">Paketmu</em></h2>
+    <div class="plans reveal">
+      <div class="plan">
+        <div class="nm">BASIC</div>
+        <div class="pr">Rp 99<small>rb</small></div>
+        <div class="lead" style="font-size:.9rem">Undangan 2D elegan, satu file jadi.</div>
+        <ul>
+          <li>13 seksi premium lengkap</li>
+          <li>Foto kalian (maks 10)</li>
+          <li>RSVP + buku tamu</li>
+          <li>Amplop digital + QRIS</li>
+          <li>Nama tamu otomatis (?to=)</li>
+          <li>Revisi 1× · jadi 1×24 jam</li>
+        </ul>
+        <a class="btn" href="https://wa.me/6281387906930?text=Halo%2C%20saya%20ambil%20paket%20BASIC%20Rp99rb">Pilih Basic</a>
+      </div>
+      <div class="plan hi">
+        <span class="tag">Paling Dipilih</span>
+        <div class="nm">PREMIUM</div>
+        <div class="pr">Rp 199<small>rb</small></div>
+        <div class="lead" style="font-size:.9rem">Lengkap + musik, gallery lebih kaya.</div>
+        <ul>
+          <li>Semua fitur Basic</li>
+          <li>Musik latar otomatis</li>
+          <li>Galeri geser + lightbox (maks 20 foto)</li>
+          <li>Seksi video prewedding</li>
+          <li>Dress code & rundown interaktif</li>
+          <li>Revisi 2× · jadi 1×24 jam</li>
+        </ul>
+        <a class="btn" href="https://wa.me/6281387906930?text=Halo%2C%20saya%20ambil%20paket%20PREMIUM%20Rp199rb">Pilih Premium</a>
+      </div>
+      <div class="plan">
+        <div class="nm">SIGNATURE 3D</div>
+        <div class="pr">Rp 499<small>rb</small></div>
+        <div class="lead" style="font-size:.9rem">Pengalaman WebGL 3D — kelas award.</div>
+        <ul>
+          <li>Semua fitur Premium</li>
+          <li>Partikel 3D + cahaya sinematik (WebGL)</li>
+          <li>Pembuka sinematik + efek cahaya</li>
+          <li>Cover foto kalian bergaya film</li>
+          <li>Prioritas pengerjaan</li>
+          <li>Revisi 3× · jadi 2×24 jam</li>
+        </ul>
+        <a class="btn" href="https://wa.me/6281387906930?text=Halo%2C%20saya%20ambil%20SIGNATURE%203D%20Rp499rb">Pilih Signature</a>
+      </div>
+    </div>
+    <p class="lead reveal" style="margin-top:22px;font-size:.95rem">Hosting GRATIS permanen (Cloudflare/Tinaa) — link undangan aktif sampai hari H + 30 hari.</p>
+  </div>
+</section>
+
+<section class="center">
+  <div class="wrap">
+    <div class="micro reveal">Cara Pesan</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.8rem);margin-top:8px">Semudah <em style="font-family:var(--serif2);font-style:italic;color:var(--gold)">Kirim Chat</em></h2>
+    <div class="steps reveal">
+      <div class="step"><b>1</b><p><b>Chat WhatsApp</b><br>Kirim nama kalian, tanggal, dan foto-foto kalian.</p></div>
+      <div class="step"><b>2</b><p><b>DP 50%</b><br>Kami mulai kerjakan hari yang sama.</p></div>
+      <div class="step"><b>3</b><p><b>Review & revisi</b><br>Kamu lihat draf, minta revisi sampai puas.</p></div>
+      <div class="step"><b>4</b><p><b>Terima link final</b><br>Link undangan aktif — langsung sebar ke tamu.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="center">
+  <div class="wrap">
+    <div class="micro reveal">FAQ</div>
+    <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.8rem);margin-top:8px">Sering <em style="font-family:var(--serif2);font-style:italic;color:var(--gold)">Ditanyakan</em></h2>
+    <div class="reveal" style="max-width:680px;margin:0 auto">
+      <details open><summary>Link undangannya aktif berapa lama?</summary><p>Sampai hari H + 30 hari. Tidak ada biaya bulanan, tidak perlu ribet hosting — kami yang urus.</p></details>
+      <details><summary>Kalau tamu saya banyak yang pakai HP kentang?</summary><p>Aman. Ada versi ringan otomatis: tanpa efek 3D berat, tapi tetap mewah dan cepat dibuka.</p></details>
+      <details><summary>Bisa pakai foto & nama kami sendiri?</summary><p>Tentu — justru itu intinya. Kirim foto terbaik kalian, nama lengkap, tanggal, alamat acara, dan nomor rekening untuk amplop digital.</p></details>
+      <details><summary>Revisi itu bagaimana hitungannya?</summary><p>Ganti warna, teks, urutan seksi, ganti foto = 1 revisi. Perombakan total desain dihitung pesanan baru, tapi sampai saat ini belum pernah ada yang butuh.</p></details>
+      <details><summary>Bayar gimana?</summary><p>DP 50% untuk mulai, pelunasan setelah draf disetujui sebelum link final diserahkan. BCA/Mandiri/QRIS.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="center" style="padding-bottom:110px">
+  <div class="wrap">
+    <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.8rem)">Hari bahagiamu layak dibuka dengan <em style="font-family:var(--serif2);font-style:italic;color:var(--gold)">kejutan</em>.</h2>
+    <div class="reveal" style="margin-top:26px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a class="btn wa" href="https://wa.me/6281387906930?text=Halo%2C%20saya%20mau%20pesan%20undangan%20digital" target="_blank" rel="noopener">Pesan Sekarang — WhatsApp</a>
+      <a class="btn" href="http://127.0.0.1:8903/index.html?to=Calon%20Mempelai" target="_blank" rel="noopener">Coba Demo Dulu</a>
+    </div>
+    <p class="micro reveal" style="margin-top:22px">Slot pengerjaan terbatas 5 undangan / minggu</p>
+  </div>
+</section>
+
+<div class="wafix"><a href="https://wa.me/6281387906930" target="_blank" rel="noopener" aria-label="WhatsApp"><span style="font-family:var(--sans);font-weight:500;font-size:.72rem;letter-spacing:.08em">WA</span></a></div>
+<footer>Rangga Studio · Undangan Digital Premium · 2027</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+function sweep(){document.querySelectorAll('.reveal:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.92)el.classList.add('in')})}
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+addEventListener('scroll',sweep,{passive:true});addEventListener('load',sweep);
+setInterval(()=>{sweep();if(!document.querySelector('.reveal:not(.in)'))return},400);
+</script>
+</body>
+</html>
